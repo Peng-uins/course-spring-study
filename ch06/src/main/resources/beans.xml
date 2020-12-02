@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        <bean id="users" class="edu.nf.ch06.Users">
+            <!-- 构造方法注入,基本类型和String要用value不能使用ref
+
+             -->
+           <!-- <constructor-arg name="userName" value="user1"/>
+            <constructor-arg name="age" value="21"/>-->
+            <!-- 注入list集合，set集合和list一样把list换成set就好了 -->
+            <!-- <constructor-arg name="address">
+              <list>
+                  <value>广州</value>
+                  <value>珠海</value>
+              </list>
+          </constructor-arg>-->
+            <!-- 注入map集合 -->
+            <!--  <constructor-arg name="cord">
+                  <map>-->
+                      <!-- 一个entry代表一个键值对 -->
+            <!-- <entry key="工行" value="15485454454454545"/>
+            <entry key="建行" value="15485454478787745"/>
+        </map>
+    </constructor-arg>-->
+            <!-- 注入Properties对象 -->
+            <!--  <constructor-arg name="prop">
+                 <props>
+                     <prop key="aa">123456</prop>
+                     <prop key="bb">231544</prop>
+                 </props>
+             </constructor-arg>-->
+
+            <property name="userName" value="user2"/>
+            <property name="age" value="25"/>
+            <property name="address">
+                <list>
+                    <value>广州</value>
+                    <value>珠海</value>
+                </list>
+            </property>
+            <property name="cord">
+                <map>
+                    <entry key="工行" value="123456789456123"/>
+                    <entry key="建行" value="123456789456123"/>
+                </map>
+            </property>
+            <property name="prop">
+                <props>
+                    <prop key="aa">12356</prop>
+                    <prop key="bb">12356</prop>
+                </props>
+            </property>
+         </bean>
+ </beans>

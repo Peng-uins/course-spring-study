@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 装配UserDao -->
+        <bean id="userDao" class="edu.nf.ch08.factorybean.MapperFactoryBean">
+            <!-- MapperFactoryBean需要注入一个Dao接口的Class对象
+                 注入的时候只需要给Dao的完整类名即可，Spring会将其加载并创建Class
+             -->
+            <property name="daoInterface" value="edu.nf.ch08.dao.UserDao"/>
+        </bean>
+
+        <!-- 要加一个Dao就直接这样加就好了-->
+        <!-- 装配UserService -->
+       <!--<bean id="userService" class="edu.nf.ch08.service.impl.UserServiceImpl">
+                &lt;!&ndash; 这里爆红线是因为userDao是在运行时候生成的，现在没有所有会有红线 &ndash;&gt;
+            <property name="userDao" ref="userDao"/>
+        </bean>-->
+</beans>
