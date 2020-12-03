@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 装配dao -->
+    <bean id="userDao" class="edu.nf.ch09.dao.impl.UserDaoImpl"/>
+
+    <!-- 装配service -->
+    <bean id="userService" class="edu.nf.ch09.service.impl.UserServiceImpl">
+        <property name="dao" ref="userDao"/>
+    </bean>
+
+    <!-- 装配controller -->
+    <bean id="userController" class="edu.nf.ch09.controller.UserController">
+        <property name="service" ref="userService"/>
+    </bean>
+
+</beans>
