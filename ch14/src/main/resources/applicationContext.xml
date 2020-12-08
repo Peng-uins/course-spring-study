@@ -6,5 +6,41 @@
         <!-- 装配业务层对象 -->
       <bean id="userService" class="edu.nf.ch14.service.impl.UserServiceImpl"/>
 
+        <!-- 配置stuService -->
+      <bean id="stuService" class="edu.nf.ch14.service.StuService"/>
+
+      <!-- 装配切面，将切面纳入IOC容器中 -->
+      <bean id="userServiceAspect" class="edu.nf.ch14.aspect.UserServiceAspect"/>
+
+      <!-- 将切面应用到目标对象上并创建代理，可以使用Spring提供的ProxyFactoryBean
+           这个FactoryBean的核心作用就是创建代理实例，并将其纳入IOC容器中
+       -->
+      <bean id="userServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+          <!-- 需要注入一些相应的属性才能创建代理对象 -->
+          <!-- 目标对象所实现的接口，如果有接口，spring会自动使用JDK动态代理
+               否则就使用cglib来创建代理对象
+           -->
+          <!--<property name="proxyInterfaces" value="edu.nf.ch14.service.UserService"/>-->
+          <!-- 上面是单个接口，多个接口就使用下面的方式 -->
+         <!-- <property name="proxyInterfaces">
+              <list>
+                  <value>edu.nf.ch14.service.UserService</value>
+              </list>
+          </property>-->
+
+          <!-- 指定目标对象，也就是被代理的实例,ref指定上面配置的目标对象的id -->
+          <property name="target" ref="stuService"/>
+
+          <!-- 配置切面,这样spring在调用目标对象方法时会织入相应增强
+                生产中困难会有多个切面所以用集合
+           -->
+          <property name="interceptorNames">
+              <list>
+                  <!-- 引用上面装配切面的id -->
+                  <value>userServiceAspect</value>
+              </list>
+          </property>
+      </bean>
+
 
 </beans>

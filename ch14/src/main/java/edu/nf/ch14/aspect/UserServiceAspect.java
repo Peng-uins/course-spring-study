@@ -25,6 +25,9 @@ import java.lang.reflect.Method;
  * MethodInterceptor接口实现环绕通知，就是前面调用后面也调用，前后都要做那就直接环绕
  * 前后都调用，在目标前后都执行逻辑
  *
+ * 环绕通知和前后通知的前后是没有顺序的，是反射来决定，但是肯定先执行这通知,
+ * 如果方法中间有错误就不会执行后置通知和后面的环绕通知。
+ *
  * ThrowsAdvice用于实现异常通知，在目标方法抛出异常后执行的逻辑
  */
 public class UserServiceAspect implements MethodBeforeAdvice, AfterReturningAdvice, MethodInterceptor, ThrowsAdvice {
@@ -43,6 +46,7 @@ public class UserServiceAspect implements MethodBeforeAdvice, AfterReturningAdvi
 
     /**
      * 后置通知
+     * （注意：如果产生了异常，则不会执行后置通知，因为没有正常返回是不会执行的）
      * @param returnValue 目标方法的返回值
      * @param method 目标对象正在调用的方法
      * @param args 目标方法的所需的参数
